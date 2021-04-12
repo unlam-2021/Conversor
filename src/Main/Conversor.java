@@ -23,7 +23,16 @@ public class Conversor extends javax.swing.JFrame {
      */
     public Conversor() {
         initComponents();
-        setTitle("Mi conversor");
+        setTitle("Mi conversor generico");
+        setLocationRelativeTo(null);
+        
+        converter = new Converter();
+        
+        for (String unit : converter.getUnits()) {
+            jComboBoxOriginUnit.addItem(unit);
+            jComboBoxFinalUnit.addItem(unit);
+        }
+        
     }
 
     /**
@@ -35,26 +44,24 @@ public class Conversor extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
-        jTextFieldCent = new javax.swing.JTextField();
+        originField = new javax.swing.JTextField();
         jButtonConvertir = new javax.swing.JButton();
-        jLabel2 = new javax.swing.JLabel();
-        jTextFieldPul = new javax.swing.JTextField();
+        finalField = new javax.swing.JTextField();
         errorText = new javax.swing.JLabel();
+        jComboBoxOriginUnit = new javax.swing.JComboBox<>();
+        jComboBoxFinalUnit = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setText("Centimetros");
-
-        jTextFieldCent.setText("0.00");
-        jTextFieldCent.addActionListener(new java.awt.event.ActionListener() {
+        originField.setText("0.00");
+        originField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextFieldCentActionPerformed(evt);
+                originFieldActionPerformed(evt);
             }
         });
-        jTextFieldCent.addKeyListener(new java.awt.event.KeyAdapter() {
+        originField.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
-                jTextFieldCentKeyReleased(evt);
+                originFieldKeyReleased(evt);
             }
         });
 
@@ -65,21 +72,42 @@ public class Conversor extends javax.swing.JFrame {
             }
         });
 
-        jLabel2.setText("Pulgadas");
-
-        jTextFieldPul.setText("0.00");
-        jTextFieldPul.addActionListener(new java.awt.event.ActionListener() {
+        finalField.setText("0.00");
+        finalField.setEnabled(false);
+        finalField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextFieldPulActionPerformed(evt);
+                finalFieldActionPerformed(evt);
             }
         });
-        jTextFieldPul.addKeyListener(new java.awt.event.KeyAdapter() {
+        finalField.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
-                jTextFieldPulKeyReleased(evt);
+                finalFieldKeyReleased(evt);
             }
         });
 
         errorText.setForeground(new java.awt.Color(255, 0, 0));
+
+        jComboBoxOriginUnit.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jComboBoxOriginUnitItemStateChanged(evt);
+            }
+        });
+        jComboBoxOriginUnit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxOriginUnitActionPerformed(evt);
+            }
+        });
+
+        jComboBoxFinalUnit.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jComboBoxFinalUnitItemStateChanged(evt);
+            }
+        });
+        jComboBoxFinalUnit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxFinalUnitActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -89,73 +117,58 @@ public class Conversor extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(errorText, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel1)
-                                .addGap(46, 46, 46)
-                                .addComponent(jTextFieldCent, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel2)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jTextFieldPul, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(140, 140, 140)))
-                .addContainerGap(12, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jButtonConvertir, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jComboBoxOriginUnit, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jComboBoxFinalUnit, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(finalField, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(originField, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButtonConvertir, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(11, 11, 11)))
+                .addContainerGap(24, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(25, 25, 25)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(jTextFieldCent, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(originField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jComboBoxOriginUnit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButtonConvertir)
-                .addGap(2, 2, 2)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(jTextFieldPul, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(81, 81, 81)
-                .addComponent(errorText, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(80, Short.MAX_VALUE))
+                    .addComponent(finalField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jComboBoxFinalUnit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jButtonConvertir)
+                .addGap(67, 67, 67)
+                .addComponent(errorText, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextFieldCentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldCentActionPerformed
+    private void originFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_originFieldActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextFieldCentActionPerformed
+    }//GEN-LAST:event_originFieldActionPerformed
 
     private void jButtonConvertirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConvertirActionPerformed
         errorText.setText("");
-        javax.swing.JTextField originField;
-        javax.swing.JTextField destField;
-        ConverterInterface converter;
-        Double result = 0D;
-        
-        if (convertirACent) {
-            originField = jTextFieldPul;
-            destField = jTextFieldCent;
-            converter = new PulToCentConverter();
-            
-        } else {
-            originField = jTextFieldCent;
-            destField = jTextFieldPul;
-            converter = new CentToPulConverter();
-        }
+        Double input = 0D;
+        Boolean error = false;
         
         try {
-            result = converter.convert(getDouble(originField));
+            input = getDouble(originField);
         } catch (NumberFormatException e) {
             errorText.setText("El valor ingresado parece no ser un numero");
             JOptionPane.showMessageDialog(this, "El valor ingresado parece no ser un numero", "ERROR", JOptionPane.ERROR_MESSAGE);
-        }
+            error = true;
+        }        
         
-        destField.setText(String.format("%.2f", result));
+        if (!error) {
+           finalField.setText(String.format("%.2f", converter.convert(input))); 
+        }
     }//GEN-LAST:event_jButtonConvertirActionPerformed
 
     
@@ -163,23 +176,39 @@ public class Conversor extends javax.swing.JFrame {
         return Double.valueOf(field.getText());
     }
     
-    private void jTextFieldCentKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldCentKeyReleased
+    private void originFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_originFieldKeyReleased
         this.convertirACent = false;
-        this.cleanField(jTextFieldPul);
-    }//GEN-LAST:event_jTextFieldCentKeyReleased
+        this.cleanField(finalField);
+    }//GEN-LAST:event_originFieldKeyReleased
 
-    private void jTextFieldPulKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldPulKeyReleased
+    private void finalFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_finalFieldKeyReleased
         this.convertirACent = true;
-        this.cleanField(jTextFieldCent);
-    }//GEN-LAST:event_jTextFieldPulKeyReleased
+        this.cleanField(originField);
+    }//GEN-LAST:event_finalFieldKeyReleased
 
     private void cleanField(javax.swing.JTextField field) {
         field.setText("");
     }
     
-    private void jTextFieldPulActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldPulActionPerformed
+    private void finalFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_finalFieldActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextFieldPulActionPerformed
+    }//GEN-LAST:event_finalFieldActionPerformed
+
+    private void jComboBoxOriginUnitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxOriginUnitActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBoxOriginUnitActionPerformed
+
+    private void jComboBoxFinalUnitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxFinalUnitActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBoxFinalUnitActionPerformed
+
+    private void jComboBoxOriginUnitItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBoxOriginUnitItemStateChanged
+       converter.setOriginUnit(evt.getItem().toString());
+    }//GEN-LAST:event_jComboBoxOriginUnitItemStateChanged
+
+    private void jComboBoxFinalUnitItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBoxFinalUnitItemStateChanged
+        converter.setFinalUnit(evt.getItem().toString());
+    }//GEN-LAST:event_jComboBoxFinalUnitItemStateChanged
 
     /**
      * @param args the command line arguments
@@ -218,13 +247,14 @@ public class Conversor extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel errorText;
+    private javax.swing.JTextField finalField;
     private javax.swing.JButton jButtonConvertir;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JTextField jTextFieldCent;
-    private javax.swing.JTextField jTextFieldPul;
+    private javax.swing.JComboBox<String> jComboBoxFinalUnit;
+    private javax.swing.JComboBox<String> jComboBoxOriginUnit;
+    private javax.swing.JTextField originField;
     // End of variables declaration//GEN-END:variables
 
     
     private Boolean convertirACent = false;
+    private Converter converter;
 }
