@@ -5,6 +5,11 @@
  */
 package Main;
 
+import Converter.InchesConverter;
+import Converter.KilometersConverter;
+import Converter.MetersConverter;
+import Converter.MilesConverter;
+import Converter.MilimetersConverter;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -12,17 +17,17 @@ import java.util.Map;
  *
  * @author flescano
  */
-public class Converter {
-    public Converter () {
+public class ConverterController {
+    public ConverterController () {
         originUnit = MILIMETERS;
         finalUnit = MILIMETERS;
         
-        convertValues.put(MILIMETERS, 1D);
-        convertValues.put(METERS, 0.001);
-        convertValues.put(INCHES, 0.0393701);
-        convertValues.put(MILES, 6.21371e-7);
-        convertValues.put(KILOMETERS, 1e-6);
-        convertValues.put(CENTIMETERS, 0.1);
+        convertInstances.put(MILIMETERS, new MilimetersConverter());
+        convertInstances.put(METERS, new MetersConverter());
+        convertInstances.put(INCHES, new InchesConverter());
+        convertInstances.put(MILES, new MilesConverter());
+        convertInstances.put(KILOMETERS, new KilometersConverter());
+        convertInstances.put(CENTIMETERS, new MilimetersConverter());
     }
     
     public String[] getUnits() {
@@ -52,13 +57,12 @@ public class Converter {
     }
     
     private Double toMilimeters(Double value) {
-        return value/convertValues.get(originUnit);
+        return convertInstances.get(originUnit).toMilimeters(value);
     }
     
     private Double toFinalUnit(Double value) {
-        return value*convertValues.get(finalUnit);
+        return convertInstances.get(finalUnit).fromMilimeters(value);
     }
-    
     
     private static final String MILIMETERS = "Milimetros"; 
     private static final String METERS = "Metros";
@@ -67,7 +71,7 @@ public class Converter {
     private static final String KILOMETERS = "Kilometros"; 
     private static final String CENTIMETERS = "Centimetros";
     
-    private static Map<String, Double> convertValues = new HashMap<String, Double>();
+    private static Map<String, Converter.Converter> convertInstances = new HashMap<String, Converter.Converter>();
     
     private String originUnit;
     private String finalUnit;
