@@ -154,10 +154,8 @@ public class Conversor extends javax.swing.JFrame {
     }
     
     private Double getDouble(javax.swing.JTextField field) {
-        String fieldText = field.getText().replace(',','.');
-        System.out.println(fieldText);
+        String fieldText = field.getText().trim().replace(',','.');
         if (fieldText.length() < 1) {
-            System.out.println(fieldText.length());
             throw new NumberFormatException("No ingeso ningun numero");
         }
         
