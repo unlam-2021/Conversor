@@ -154,7 +154,7 @@ public class Conversor extends javax.swing.JFrame {
     }
     
     private Double getDouble(javax.swing.JTextField field) {
-        String fieldText = field.getText();
+        String fieldText = field.getText().replace(',','.');
         System.out.println(fieldText);
         if (fieldText.length() < 1) {
             System.out.println(fieldText.length());
@@ -165,7 +165,7 @@ public class Conversor extends javax.swing.JFrame {
             throw new NumberFormatException("Contiene valores no permitidos");
         }
         
-        return Double.valueOf(field.getText());
+        return Double.valueOf(fieldText);
     }
     
     private void originFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_originFieldKeyReleased
