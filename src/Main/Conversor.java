@@ -1,10 +1,6 @@
 package Main;
 
-
-import Converter.PulToCentConverter;
-import Converter.CentToPulConverter;
 import javax.swing.JOptionPane;
-import Converter.ConverterInterface;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -23,10 +19,10 @@ public class Conversor extends javax.swing.JFrame {
      */
     public Conversor() {
         initComponents();
-        setTitle("Mi conversor generico");
+        setTitle("Mi conversor de distancias");
         setLocationRelativeTo(null);
         
-        converter = new Converter();
+        converter = new ConverterController();
         
         for (String unit : converter.getUnits()) {
             jComboBoxOriginUnit.addItem(unit);
@@ -54,11 +50,6 @@ public class Conversor extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         originField.setText("0.00");
-        originField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                originFieldActionPerformed(evt);
-            }
-        });
         originField.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 originFieldKeyReleased(evt);
@@ -74,16 +65,6 @@ public class Conversor extends javax.swing.JFrame {
 
         finalField.setText("0.00");
         finalField.setEnabled(false);
-        finalField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                finalFieldActionPerformed(evt);
-            }
-        });
-        finalField.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                finalFieldKeyReleased(evt);
-            }
-        });
 
         errorText.setForeground(new java.awt.Color(255, 0, 0));
 
@@ -149,10 +130,6 @@ public class Conversor extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void originFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_originFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_originFieldActionPerformed
-
     private void jButtonConvertirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConvertirActionPerformed
         errorText.setText("");
         Double input = 0D;
@@ -171,7 +148,6 @@ public class Conversor extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButtonConvertirActionPerformed
 
-    
     private Double getDouble(javax.swing.JTextField field) {
         return Double.valueOf(field.getText());
     }
@@ -179,21 +155,13 @@ public class Conversor extends javax.swing.JFrame {
     private void originFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_originFieldKeyReleased
         this.convertirACent = false;
         this.cleanField(finalField);
+        // TODO: Check enter.
     }//GEN-LAST:event_originFieldKeyReleased
-
-    private void finalFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_finalFieldKeyReleased
-        this.convertirACent = true;
-        this.cleanField(originField);
-    }//GEN-LAST:event_finalFieldKeyReleased
 
     private void cleanField(javax.swing.JTextField field) {
         field.setText("");
     }
     
-    private void finalFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_finalFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_finalFieldActionPerformed
-
     private void jComboBoxOriginUnitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxOriginUnitActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jComboBoxOriginUnitActionPerformed
@@ -256,5 +224,5 @@ public class Conversor extends javax.swing.JFrame {
 
     
     private Boolean convertirACent = false;
-    private Converter converter;
+    private ConverterController converter;
 }
