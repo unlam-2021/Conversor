@@ -1,5 +1,6 @@
 package Main;
 
+import java.awt.event.KeyEvent;
 import javax.swing.JOptionPane;
 
 /*
@@ -131,6 +132,10 @@ public class Conversor extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonConvertirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConvertirActionPerformed
+        convert();
+    }//GEN-LAST:event_jButtonConvertirActionPerformed
+
+    private void convert() {
         errorText.setText("");
         Double input = 0D;
         Boolean error = false;
@@ -146,16 +151,30 @@ public class Conversor extends javax.swing.JFrame {
         if (!error) {
            finalField.setText(String.format("%.2f", converter.convert(input))); 
         }
-    }//GEN-LAST:event_jButtonConvertirActionPerformed
-
+    }
+    
     private Double getDouble(javax.swing.JTextField field) {
+        String fieldText = field.getText();
+        System.out.println(fieldText);
+        if (fieldText.length() < 1) {
+            System.out.println(fieldText.length());
+            throw new NumberFormatException("No ingeso ningun numero");
+        }
+        
+        if (!Character.isDigit(fieldText.charAt(fieldText.length() -1))) {
+            throw new NumberFormatException("Contiene valores no permitidos");
+        }
+        
         return Double.valueOf(field.getText());
     }
     
     private void originFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_originFieldKeyReleased
         this.convertirACent = false;
         this.cleanField(finalField);
-        // TODO: Check enter.
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            // Enter was pressed. Your code goes here.
+            convert();
+        }
     }//GEN-LAST:event_originFieldKeyReleased
 
     private void cleanField(javax.swing.JTextField field) {
