@@ -29,13 +29,13 @@
                   <Component id="errorText" max="32767" attributes="0"/>
                   <Group type="102" alignment="0" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jComboBoxOriginUnit" min="-2" pref="117" max="-2" attributes="0"/>
-                          <Component id="jComboBoxFinalUnit" alignment="0" min="-2" pref="117" max="-2" attributes="0"/>
+                          <Component id="jComboBoxUpperUnit" min="-2" pref="117" max="-2" attributes="0"/>
+                          <Component id="jComboBoxDownUnit" alignment="0" min="-2" pref="117" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="finalField" min="-2" pref="123" max="-2" attributes="0"/>
-                          <Component id="originField" min="-2" pref="123" max="-2" attributes="0"/>
+                          <Component id="downField" min="-2" pref="123" max="-2" attributes="0"/>
+                          <Component id="upperField" min="-2" pref="123" max="-2" attributes="0"/>
                           <Component id="jButtonConvertir" alignment="0" min="-2" pref="123" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="11" max="-2" attributes="0"/>
@@ -50,13 +50,13 @@
           <Group type="102" attributes="0">
               <EmptySpace max="32767" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="originField" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jComboBoxOriginUnit" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="upperField" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jComboBoxUpperUnit" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="finalField" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jComboBoxFinalUnit" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="downField" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jComboBoxDownUnit" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Component id="jButtonConvertir" min="-2" max="-2" attributes="0"/>
@@ -67,12 +67,13 @@
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Component class="javax.swing.JTextField" name="originField">
+    <Component class="javax.swing.JTextField" name="upperField">
       <Properties>
         <Property name="text" type="java.lang.String" value="0.00"/>
       </Properties>
       <Events>
-        <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="originFieldKeyReleased"/>
+        <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="upperFieldFocusGained"/>
+        <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="upperFieldKeyReleased"/>
       </Events>
     </Component>
     <Component class="javax.swing.JButton" name="jButtonConvertir">
@@ -83,11 +84,14 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonConvertirActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JTextField" name="finalField">
+    <Component class="javax.swing.JTextField" name="downField">
       <Properties>
         <Property name="text" type="java.lang.String" value="0.00"/>
-        <Property name="enabled" type="boolean" value="false"/>
       </Properties>
+      <Events>
+        <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="downFieldFocusGained"/>
+        <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="downFieldKeyReleased"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="errorText">
       <Properties>
@@ -96,29 +100,27 @@
         </Property>
       </Properties>
     </Component>
-    <Component class="javax.swing.JComboBox" name="jComboBoxOriginUnit">
+    <Component class="javax.swing.JComboBox" name="jComboBoxUpperUnit">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
           <StringArray count="0"/>
         </Property>
       </Properties>
       <Events>
-        <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jComboBoxOriginUnitItemStateChanged"/>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jComboBoxOriginUnitActionPerformed"/>
+        <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jComboBoxUpperUnitItemStateChanged"/>
       </Events>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
       </AuxValues>
     </Component>
-    <Component class="javax.swing.JComboBox" name="jComboBoxFinalUnit">
+    <Component class="javax.swing.JComboBox" name="jComboBoxDownUnit">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
           <StringArray count="0"/>
         </Property>
       </Properties>
       <Events>
-        <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jComboBoxFinalUnitItemStateChanged"/>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jComboBoxFinalUnitActionPerformed"/>
+        <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jComboBoxDownUnitItemStateChanged"/>
       </Events>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>

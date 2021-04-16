@@ -1,10 +1,13 @@
-# Programacion avanzada - Clase 1
+# Programacion avanzada - TP 1
 
 ## Conversor
-La idea es tener un aplicacion que permita convertir pulgas a centimetros y viceversa. 
+Contener al menor 5 tipos de conversores. Pueden incluir los dos vistos en clase.
+Dos TextFields, con UN solo botón para convertir.
+Presionando `<ENTER>` sobre los TextFields, debe convertir.
+No contener código repetido, esto es reutilizar sentencias de código que se necesitan en eventos diferentes.
+Manejo de error con Exceptions (ej.: NumberFormatException), mostrando un mensaje amigable via JOptionPane.
+Si se ingresa la `,` (coma) como separador decimal, que se realice la conversión.
 
 ### Sobre la solucion
 
-`Main.Conversor` (Dentro de la carpeta `src`) es la interfaz grafica hecha con JFrameFrorm. Se utiliza un flag y chequeo de eventos keyRelease para decidir que conversion debe hacerse. Al clickear en el boton convertir se llama a un converter especifico para realizar la operacion. 
-
-Aunque esta fuera del alcance de la primera clase se considero oportuno crear la interfaz `ConverterInterface` y las implementaciones correspondientes para tener un flujo de ejecucion mas limpio. 
+Se utilzo una clase abstracta para las conversiones y cumplir con el polimorfismo. Como el enunciado pide dos inputs editables se tuvo que optar por tener un toggle en el controller de los conversores, para poder hacer un swap de origin unit y final unit de una forma un poco mas elegante. 

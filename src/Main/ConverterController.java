@@ -5,6 +5,7 @@
  */
 package Main;
 
+import Converter.CentimetersConverter;
 import Converter.InchesConverter;
 import Converter.KilometersConverter;
 import Converter.MetersConverter;
@@ -27,7 +28,7 @@ public class ConverterController {
         convertInstances.put(INCHES, new InchesConverter());
         convertInstances.put(MILES, new MilesConverter());
         convertInstances.put(KILOMETERS, new KilometersConverter());
-        convertInstances.put(CENTIMETERS, new MilimetersConverter());
+        convertInstances.put(CENTIMETERS, new CentimetersConverter());
     }
     
     public String[] getUnits() {
@@ -62,6 +63,12 @@ public class ConverterController {
     
     private Double toFinalUnit(Double value) {
         return convertInstances.get(finalUnit).fromMilimeters(value);
+    }
+    
+    public void toggle() {
+        String temp = originUnit;
+        originUnit = finalUnit;
+        finalUnit = temp;
     }
     
     private static final String MILIMETERS = "Milimetros"; 
