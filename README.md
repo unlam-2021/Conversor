@@ -1,12 +1,13 @@
 # Programacion avanzada - TP 1
 
 ## Conversor
-Contener al menor 5 tipos de conversores. Pueden incluir los dos vistos en clase.
-Dos TextFields, con UN solo botón para convertir.
-Presionando `<ENTER>` sobre los TextFields, debe convertir.
-No contener código repetido, esto es reutilizar sentencias de código que se necesitan en eventos diferentes.
-Manejo de error con Exceptions (ej.: NumberFormatException), mostrando un mensaje amigable via JOptionPane.
-Si se ingresa la `,` (coma) como separador decimal, que se realice la conversión.
+* Contener al menor 5 tipos de conversores. 
+* Pueden incluir los dos vistos en clase.
+* Dos TextFields, con UN solo botón para convertir.
+* Presionando `<ENTER>` sobre los TextFields, debe convertir.
+* No contener código repetido, esto es reutilizar sentencias de código que se necesitan en eventos diferentes.
+* Manejo de error con Exceptions (ej.: NumberFormatException), mostrando un mensaje amigable via JOptionPane.
+* Si se ingresa la `,` (coma) como separador decimal, que se realice la conversión.
 
 ### Sobre la solucion
 
